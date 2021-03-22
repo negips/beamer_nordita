@@ -6,6 +6,10 @@
 %
 % Jacopo  Canton   <jcanton@mech.kth.se>
 % Nicolo` Fabbiane  <nicolo@mech.kth.se>
+%
+% Unofficial Nordita theme added by
+% Prabal Negi <prabal.negi@su.se>
+
 
 
 %------------------------------------------------------------------------------
@@ -45,6 +49,21 @@
 \newcommand{\textred}[1]{{\color{RedOrange}#1}}
 \newcommand{\textora}[1]{{\color{BurntOrange}#1}}
 \newcommand{\textgre}[1]{{\color{OliveGreen}#1}}
+
+
+% Nordita Colors
+% 	      Norway blue	  Finland blue	Iceland red	  Denmark red	Sweden yellow	White
+%PMS	      PMS 281	  PMS 294	      PMS 1795	  PMS 185	      PMS 109
+%CMYK	      100-72-0-32	  100-56-0-18.5	0-94-100-0	  0-91-76-0	      0-10-100-0	      0-0-0-0
+%RGB	      10-31-98	  9-53-122	      255-19-0	  252-25-33	      255-230-0	      255-255-255
+%Web	      #0a1f62	  #09357a	      #ff0f00	  #fc1921	      #ffe600	      #ffffff
+%Grayscale	100.0%	  81.5%	      66.5%	        62.0%	      16.9% 	      0.0%
+
+\definecolor{Norwayblue}{rgb}{0.0392157, 0.121569, 0.384314}
+\definecolor{Finlandblue}{rgb}{0.0352941, 0.207843, 0.478431}
+\definecolor{Icelandred}{rgb}{1.0, 0.0745098, 0.0}
+\definecolor{Denmarkred}{rgb}{0.988235, 0.0980392, 0.129412}
+\definecolor{Swedenyellow}{rgb}{1.0, 0.901961, 0.0}
 
 %------------------------------------------------------------------------------
 % Settings
@@ -204,31 +223,31 @@
 		};
 		%
             %------------
-            \node (image) at (page cs:0.80,0.77)
-            {
-                  \includegraphics[width=0.25\textwidth]{SNIC.png}%
-            };
-            \node (image) at (page cs:0.60,0.30)
-            {
-                  \includegraphics[width=0.25\textwidth]{ERC.png}%
-            };
-            \node (image) at (page cs:0.50,0.80)
-            {
-                  \includegraphics[width=0.25\textwidth]{SeRC.png}%
-            };
-
-%            \node (image) at (page cs:0.80,0.30)
+%            \node (image) at (page cs:0.80,0.77)
 %            {
-%                  \includegraphics[width=0.25\textwidth]{KAW.jpg}%
+%                  \includegraphics[width=0.25\textwidth]{SNIC.png}%
 %            };
-            \node (image) at (page cs:0.20,0.80)
-            {
-                  \includegraphics[width=0.25\textwidth]{PRACE.png}%
-            };
-            \node (image) at (page cs:0.25,0.30)
-            {
-                  \includegraphics[width=0.25\textwidth]{Vinnova.png}%
-            };
+%            \node (image) at (page cs:0.60,0.30)
+%            {
+%                  \includegraphics[width=0.25\textwidth]{ERC.png}%
+%            };
+%            \node (image) at (page cs:0.50,0.80)
+%            {
+%                  \includegraphics[width=0.25\textwidth]{SeRC.png}%
+%            };
+%
+%%            \node (image) at (page cs:0.80,0.30)
+%%            {
+%%                  \includegraphics[width=0.25\textwidth]{KAW.jpg}%
+%%            };
+%            \node (image) at (page cs:0.20,0.80)
+%            {
+%                  \includegraphics[width=0.25\textwidth]{PRACE.png}%
+%            };
+%            \node (image) at (page cs:0.25,0.30)
+%            {
+%                  \includegraphics[width=0.25\textwidth]{Vinnova.png}%
+%            };
             %---------- 
 
 	\end{tikzpicture}
@@ -242,42 +261,40 @@
 {%
 	\begin{tikzpicture}[remember picture, overlay]%
 		%
-		% WAVES
-		%
-		\pgfmathsetmacro{\ymax}{.050}
-		\pgfmathsetmacro{\ymin}{.035}
-		%
-		\node[xshift=-.100\paperwidth,yshift= -.100\paperheight] (waveA) at (current page.south west) {};
-		\node[xshift= .000\paperwidth,yshift=  .016\paperheight] (waveB) at (current page.south west) {};
-		%
-		\node[xshift= .145\paperwidth,yshift=  .016\paperheight] (waveC) at (current page.south west) {};
-		\node[xshift= .330\paperwidth,yshift= \ymax\paperheight] (waveD) at (current page.south west) {};
-		\node[xshift= .430\paperwidth,yshift= \ymin\paperheight] (waveE) at (current page.south west) {};
-		\node[xshift= .630\paperwidth,yshift= \ymax\paperheight] (waveF) at (current page.south west) {};
-		\node[xshift= .730\paperwidth,yshift= \ymin\paperheight] (waveG) at (current page.south west) {};
-		\node[xshift= .930\paperwidth,yshift= \ymax\paperheight] (waveH) at (current page.south west) {};
-		\node[xshift=1.030\paperwidth,yshift= \ymin\paperheight] (waveI) at (current page.south west) {};
-		%
-		\node[xshift= .100\paperwidth,yshift=-.100\paperheight] (waveZ) at (current page.south east) {};
-		%
-%		\path[fill=beamer@blendedblue]
-%		(waveA) to [out= 90,in=180]
-%		(waveB) to [out=-12,in=192]
-%		(waveC) to [out= 12,in=180]
-%		(waveD) to [out=  0,in=180] % max
-%		(waveE) to [out=  0,in=180]
-%		(waveF) to [out=  0,in=180] % max
-%		(waveG) to [out=  0,in=180]
-%		(waveH) to [out=  0,in=180] % max
-%		(waveI) to [out=  0,in=180]
-%		(waveZ);
-		%
+            \pgfmathsetmacro{\ymax}{.035}
+		\pgfmathsetmacro{\ymin}{.000}
+
+%%          Nordita Colors at the Bottom
+		\node[xshift= .000\paperwidth,yshift=  \ymin\paperheight] (bar1s) at (current page.south west) {};
+		\node[xshift= .200\paperwidth,yshift=  \ymax\paperheight] (bar1e) at (current page.south west) {};
+
+            \node[xshift= .200\paperwidth,yshift=  \ymin\paperheight] (bar2s) at (current page.south west) {};
+		\node[xshift= .400\paperwidth,yshift=  \ymax\paperheight] (bar2e) at (current page.south west) {};
+
+            \node[xshift= .400\paperwidth,yshift=  \ymin\paperheight] (bar3s) at (current page.south west) {};
+		\node[xshift= .600\paperwidth,yshift=  \ymax\paperheight] (bar3e) at (current page.south west) {};
+
+            \node[xshift= .600\paperwidth,yshift=  \ymin\paperheight] (bar4s) at (current page.south west) {};
+		\node[xshift= .800\paperwidth,yshift=  \ymax\paperheight] (bar4e) at (current page.south west) {};
+
+            \node[xshift= .800\paperwidth,yshift=  \ymin\paperheight] (bar5s) at (current page.south west) {};
+		\node[xshift=1.000\paperwidth,yshift=  \ymax\paperheight] (bar5e) at (current page.south west) {};
+
+ 		\pgfmathsetmacro{\opac}{.2}   % Set opacity
+            \node (norditabar) at (page cs:0,0) {};
+            { \path[fill=Norwayblue, opacity=\opac]   (bar1s) rectangle (bar1e); 
+              \path[fill=Icelandred, opacity=\opac]   (bar2s) rectangle (bar2e);
+              \path[fill=Swedenyellow, opacity=\opac] (bar3s) rectangle (bar3e);
+              \path[fill=Finlandblue, opacity=\opac]  (bar4s) rectangle (bar4e);
+              \path[fill=Denmarkred, opacity=\opac]   (bar5s) rectangle (bar5e);
+            };
+
 		\ifdateinfootline%
 			%
 			% DATE
 			\node[anchor=south east] (foottext) at (current page.south east) {%
 				\begin{beamercolorbox}[wd=\textwidth]{foottext}%
-					\flushright{{\color{white}\scriptsize~\insertdate}}%
+					\flushright{{\color{black}\scriptsize~\insertdate}}%
 				\end{beamercolorbox}%
 			};%
 			%
@@ -286,7 +303,7 @@
 			% AUTHOR TITLE -- FRAME #
 			\node[anchor=south east] (foottext) at (current page.south east) {%
 				\begin{beamercolorbox}[wd=\textwidth]{foottext}%
-					\flushright{{\color{white}\scriptsize~\insertshortauthor~\insertshorttitle~--~\insertframenumber~of~\inserttotalframenumber}}%
+					\flushright{{\color{black}\scriptsize~\insertshortauthor~\insertshorttitle~--~\insertframenumber~of~\inserttotalframenumber}}%
 				\end{beamercolorbox}%
 			};%
 			%
@@ -321,7 +338,7 @@
 
 
                % SU
- 		  \pgfmathsetmacro{\yshifttt}{.03}
+ 		  \pgfmathsetmacro{\yshifttt}{.04}
               \node[anchor=south,xshift= \xshifttt\paperwidth,yshift = \yshifttt\paperwidth] (logoS) at (current page.south) {
 %              \node[anchor=south,xshift= \xshifttt\paperwidth] (logotK) at (page cs:0.5,0.8) {
 			  \begin{beamercolorbox}{logoS}%
@@ -329,27 +346,6 @@
 				  \insertlogoS
 			  \end{beamercolorbox}%
 		  };
-             
-
-%		  \node[anchor=north,xshift= \xshifttt\paperwidth,yshift=0.8\baselineskip] (logob) at (current page.center) {
-%			  \begin{beamercolorbox}{logob}%
-%				  \flushleft%
-%				  \insertlogob
-%			  \end{beamercolorbox}%
-%		  };
-
-
-		  %
-%		  % LOGO(s) centered and shifted down
-%		  \node[anchor=north,yshift=\baselineskip] (logo) at (current page.center) {%
-%			  \begin{beamercolorbox}{logo}%
-%				  \flushleft%
-%				  \insertlogot%
-%				  \\[0.5\baselineskip]%
-%				  \insertlogob%
-%			  \end{beamercolorbox}%
-%		  };
-		  %
 		\else
 			%
 			% LOGO top
