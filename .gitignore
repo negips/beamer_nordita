@@ -1,0 +1,8 @@
+#List of patterns to ignore.
+**/*synctex.gz
+**/*.toc
+**/*.aux
+**/*.log
+**/*-eps-converted-to.pdf
+**/*.nav
+**/*.snm

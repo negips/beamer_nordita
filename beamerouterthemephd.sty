@@ -1,0 +1,290 @@
+\ProvidesPackage{beamerouterthemephd}[2012/06/20 ver 0.1]
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+
+% Nicolo` Fabbiane <nicolo@mech.kth.se>.
+% Modified by Prabal
+
+\beamertemplatenavigationsymbolsempty
+
+\newdimen\beamer@sidebarwidth
+\newdimen\beamer@footbarheight
+\beamer@sidebarwidth=.12\paperwidth
+\beamer@footbarheight=.10\paperwidth
+
+
+% Logo for regular slides
+\logo{
+{\begin{tabular}{c}
+       \includegraphics[width=.075\paperwidth]{KTH-logo} \\[.01\paperheight]
+       \includegraphics[width=.075\paperwidth]{Flow-logo}
+       \end{tabular}}
+}
+
+% Bigger logo for title/section/thanks pages
+\def\biglogo{{\begin{tabular}{c}
+			\includegraphics[width=.09\paperwidth]{KTH-logo} \\[.010\paperheight]
+			\includegraphics[width=.09\paperwidth]{Flow-logo}
+		\end{tabular}}} 
+
+\def\putbiglogo{
+\begin{tikzpicture}[remember picture, overlay]
+      \node (image) at (page cs:0.08,0.55)
+      {
+         {\biglogo}%
+      };
+\end{tikzpicture}
+}
+
+%------------------------------------------------------------------------------
+\RequirePackage{tikz}
+% Coordinate system for the page:
+%
+% -------------------------
+% |(0,1)             (1,1)|
+% |                       |
+% |       (0.5,0.5)       |
+% |                       |
+% |(0,0)             (1,0)|
+% -------------------------
+%
+% invoke by:
+% \node[nodeOptions] (nodeName) at (page cs:xNode,yNode) {nodeContents};
+%
+\def\parsecomma#1,#2\endparsecomma{\def\page@x{#1}\def\page@y{#2}}
+\tikzdeclarecoordinatesystem{page}{
+    \parsecomma#1\endparsecomma
+    % Save the lower left corner
+    \pgfpointanchor{current page}{south west}
+    \pgf@xa=\pgf@x%
+    \pgf@ya=\pgf@y%
+    % Save the upper right corner
+    \pgfpointanchor{current page}{north east}
+    \pgf@xb=\pgf@x%
+    \pgf@yb=\pgf@y%
+    % Transform to the correct placement
+    \pgfmathparse{(\pgf@xb-\pgf@xa)*\page@x+\pgf@xa}
+    \expandafter\pgf@x\expandafter=\pgfmathresult pt
+    \pgfmathparse{(\pgf@yb-\pgf@ya)*\page@y+\pgf@ya}
+    \expandafter\pgf@y\expandafter=\pgfmathresult pt
+}
+%------------------------------------------------------------------------------
+
+\setbeamertemplate{frametitle}
+{
+      %\vskip1.0\baselineskip\bfseries\insertframetitle
+	\vskip0.25\baselineskip%
+	\textbf{\insertframetitle}%
+	\\[0.2\baselineskip]
+	\small\insertframesubtitle%
+%	\vspace{.03\paperheight}%
+}
+
+
+\newif\ifdateinfootline \dateinfootlinefalse
+\newif\ifcenteredlogos  \centeredlogosfalse
+
+%------------------------------------------------------------------------------
+% Thanks frame
+
+\def\thanksframe{%
+      \printfootfalse
+	\centeredlogostrue%
+	\begin{frame}%
+		\usebeamertemplate*{thanks page}%
+	\end{frame}%
+	\centeredlogosfalse%
+	\addtocounter{framenumber}{-1}%
+      \printfoottrue
+}%
+%
+
+\defbeamertemplate*{thanks page}{phd theme}[1][]%
+{%
+	\begin{tikzpicture}[remember picture, overlay]%
+		%
+		\pgfmathsetmacro{\xshifttt}{.050}
+		%
+		\node[anchor=south,xshift=-\xshifttt\paperwidth] (thanks) at (current page.center) {
+			\begin{beamercolorbox}[wd=\textwidth]{title page header}%
+				\flushright%
+				\usebeamerfont{title}\textbf{Thank you for your attention.}%
+			\end{beamercolorbox}%
+		};
+		%
+		\node[anchor=north,xshift=-\xshifttt\paperwidth] (questions) at (current page.center) {
+			\begin{beamercolorbox}{author}%
+				\flushright%
+				\usebeamerfont{author}\small{Any questions?}%
+			\end{beamercolorbox}%
+		};
+		%
+	\end{tikzpicture}
+
+
+      \begin{tikzpicture}[remember picture,overlay]
+      %------------
+      \node (image) at (page cs:0.80,0.75)
+      {
+            \includegraphics[width=0.25\textwidth]{sniclogo.png}%
+      };
+      \node (image) at (page cs:0.50,0.30)
+      {
+            \includegraphics[width=0.25\textwidth]{ERC.png}%
+      };
+      \node (image) at (page cs:0.80,0.30)
+      {
+            \includegraphics[width=0.25\textwidth]{SeRC.png}%
+      };
+      \node (image) at (page cs:0.30,0.75)
+      {
+            \includegraphics[width=0.25\textwidth]{PRACE.png}%
+      };
+      \node (image) at (page cs:0.20,0.30)
+      {
+            \includegraphics[width=0.25\textwidth]{Vinnova.png}%
+      };
+%      \putbiglogo
+%     
+      \end{tikzpicture}
+}%
+
+%------------------------------------------------------------------------------
+\def\putlogo{
+  \ifcenteredlogos%
+      \vspace{0.27\paperwidth}\begin{minipage}{\beamer@sidebarwidth}\centering\end{minipage}
+      \putbiglogo
+  %
+  \else
+      \vspace{0.020\paperwidth}\begin{minipage}{\beamer@sidebarwidth}\centering\insertlogo\end{minipage}
+  \fi%
+}
+%------------------------------------------------------------------------------
+
+
+%Colors
+\definecolor{beamer@blendedblue}{rgb}{0.1373,0.4235,0.7020} % KTH blue
+\definecolor{bar}{rgb}{0.1373,0.4235,0.7020}
+\DeclareOptionBeamer{lic}{\definecolor{bar}{rgb}{0.4588,0.6235,0.2588}}
+\DeclareOptionBeamer{phd}{\definecolor{bar}{rgb}{0.1373,0.4235,0.7020}}
+
+\setbeamercolor{title in head/foot}{fg=white,bg=bar}
+
+\setbeamercolor{frametitle}{fg=black,bg=white}
+\setbeamercolor{title}{fg=black,bg=white}
+\setbeamercolor{navigation symbols}{fg=bar,bg=bar!20}
+\setbeamercolor{cut}{fg=white,bg=white}
+
+\setbeamercolor{normal text}{fg=black,bg=white}
+\setbeamercolor{alerted text}{fg=beamer@blendedblue}
+\setbeamercolor{example text}{fg=beamer@blendedblue!20}
+
+\setbeamercolor{structure}{parent=alerted text}
+\setbeamercolor{section in toc}{parent=normal text}
+\setbeamertemplate{section in toc}{%
+\leavevmode\leftskip=5.65ex%
+  \llap{\raisebox{0.1ex}{\textcolor{structure}{$\blacktriangleright$}}\kern1ex}%
+  \inserttocsection\par%
+}
+
+\setbeamercolor{palette sidebar primary}{fg=black}
+\setbeamercolor{palette sidebar secondary}{fg=black}
+\setbeamercolor{palette sidebar tertiary}{fg=black}
+\setbeamercolor{palette sidebar quaternary}{fg=black}
+
+\def\insertaffiliation{}\def\affiliation#1{\gdef\insertaffiliation{#1}}
+\def\insertschool{}\def\school#1{\gdef\insertschool{#1}}
+\def\beamer@lefttext{left}
+
+\DeclareOptionBeamer{hideothersubsections}[]{\beamer@nav@subsectionstyle{show/show/hide}}
+\DeclareOptionBeamer{hideallsubsections}[]{\beamer@nav@subsectionstyle{hide}}
+
+\DeclareOptionBeamer{left}{\def\beamer@sidebarside{left}}
+\DeclareOptionBeamer{right}{\def\beamer@sidebarside{right}}
+\ExecuteOptionsBeamer{left}
+\ProcessOptionsBeamer
+
+\mode<presentation>
+
+\setbeamercolor{author in head/foot}{parent=section in head/foot}
+\setbeamercolor{title in head/foot}{parent=subsection in head/foot}
+
+\newif\ifprintfoot
+\printfoottrue
+
+
+\ifdim\beamer@footbarheight>0pt  
+                                % Footbar
+  \defbeamertemplate*{footline}{phd theme}
+  {%
+    \leavevmode%
+    \hskip.14\paperwidth%           % prabal
+    \begin{beamercolorbox}[wd=.86\paperwidth,ht=.75\beamer@footbarheight,rounded=true]{title in head/foot}%
+    \end{beamercolorbox}%
+    \hskip-\paperwidth%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=.75\beamer@footbarheight]{title in head/foot}%
+    \ifprintfoot
+    \flushright\usebeamerfont{title in head/foot}\tiny~\insertshortauthor:~\insertshorttitle~--~\insertframenumber~of~\inserttotalframenumber\hskip0.030\paperwidth\mbox{}
+    \else
+    \flushright\usebeamerfont{title in head/foot}\tiny~\insertdate\hskip0.030\paperwidth\hskip0.030\paperwidth\mbox{}
+    \fi
+    \vskip\baselineskip\vskip0.020\paperwidth
+    \end{beamercolorbox}
+    \vskip-\beamer@footbarheight\hskip-1.335\baselineskip%
+    \begin{beamercolorbox}[rounded=true,wd=.14\paperwidth,ht=.1\beamer@footbarheight]{cut}%
+    \end{beamercolorbox}
+    \vskip.5\beamer@footbarheight%\vskip.3\baselineskip%
+  }
+\fi
+
+\ifdim\beamer@sidebarwidth>0pt
+
+                                % Sidebar
+  \setbeamersize{sidebar width \beamer@sidebarside=\beamer@sidebarwidth}
+  \defbeamertemplate*{sidebar \beamer@sidebarside}{phd theme}
+  {
+%      \vspace{0.020\paperwidth}\begin{minipage}{\beamer@sidebarwidth}\centering\insertlogo\end{minipage}
+      \putlogo
+  }%
+  
+  \ifx\beamer@sidebarside\beamer@lefttext%
+    \defbeamertemplate*{sidebar right}{sidebar theme}
+    {%
+      \vfill%
+      \llap{\usebeamertemplate***{navigation symbols}\hskip0.1cm}%
+      \vskip2pt}
+  \fi
+\fi
+
+                                % Margins
+\setbeamersize{text margin left=0.030\paperwidth,text margin right=0.030\paperwidth}
+
+\defbeamertemplate*{kth section page}{default}[1][]
+{
+  \flushright\usebeamercolor[fg]{title}{\usebeamerfont{frametitle}\LARGE\textbf{\insertsection}\par}
+}
+\newcommand*{\sectionframe}{\frame{\usebeamertemplate*{kth section page}}\addtocounter{framenumber}{-1}}
+
+\defbeamertemplate*{kth title page}{default}[1][]
+{ \mbox{}\vfill
+  \flushright
+  \begin{minipage}{.90\textwidth}\flushright
+  \usebeamercolor[fg]{title}{\usebeamerfont{frametitle}\LARGE\textbf{\inserttitle}}%\vspace{.5\baselineskip}
+  \end{minipage}\hskip0.030\paperwidth\mbox{}\par\vspace{\baselineskip}
+  \flushright\usebeamercolor[fg]{normal text}{\usebeamerfont{normal text}\small \insertauthor\hskip0.030\paperwidth\mbox{}\par%
+                                                                                \vspace{\baselineskip}%
+  																		                                           \insertaffiliation}\hskip0.030\paperwidth\mbox{}\par
+  \vspace{-2\baselineskip}\vfill\mbox{}
+}
+\newcommand*{\titleframe}
+{
+\centeredlogostrue
+\printfootfalse
+\frame{\usebeamertemplate*{kth title page}}
+\printfoottrue
+\centeredlogosfalse
+\addtocounter{framenumber}{-1}
+}
+
+
+\mode
+<all>
