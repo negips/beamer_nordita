@@ -19,7 +19,23 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 
-\newcolumntype{x}[1]{>{\centering\arraybackslash\hspace{0pt}}m{#1}}
+%\newcolumntype{x}[1]{>{\centering\arraybackslash\hspace{0pt}}m{#1}}
+
+
+% University logo(s)
+\logoNt{\includegraphics[width=.20\paperwidth]{Nordita-logo_textbelow.eps}}  % Nordita logo
+\logoK{\includegraphics[width=.15\paperwidth]{KTH-logo.eps}}  % Top logo
+\logoS{\includegraphics[width=.17\paperwidth]{SU-logo.png}}  % Top logo
+
+%\logoK{\includegraphics[width=.20\paperwidth]{KTH-logo}}  % Top logo
+%\logoS{\includegraphics[width=.20\paperwidth]{Nordita-logo_textbelow.eps}}  % Top logo
+
+\logot{\includegraphics[width=.090\paperwidth]{Nordita-logo}}  % Top logo
+\logob{\includegraphics[width=.105\paperwidth]{Flow-logo}} % Bottom logo
+
+% Graphics Path for all included figures/movies.
+% Add additional folders for your figures 
+\graphicspath{{imgs/}}
 
 
 %-------------------------------------------------------------------------------
@@ -39,7 +55,7 @@
 %                           PRESENTATION SLIDES
 %-------------------------------------------------------------------------------
 
-\input{jhu_body}
+\input{body}
 
 %\input{body19}
 %\input{naca_fsi}
